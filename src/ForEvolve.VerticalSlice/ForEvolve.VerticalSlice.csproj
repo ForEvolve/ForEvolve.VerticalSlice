@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>ForEvolve</RootNamespace>
         <Product>ForEvolve VerticalSlice</Product>
         <RepositoryUrl>https://github.com/ForEvolve/ForEvolve.VerticalSlice</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
