@@ -38,5 +38,5 @@ jobs:
       run: echo Build number is $BUILD_NUMBER
       
     - name: Push
-      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
       if: github.event_name != 'pull_request' 
