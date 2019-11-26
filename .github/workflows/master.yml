@@ -36,5 +36,5 @@ jobs:
       # --include-source --include-symbols
       
     - name: Push
-      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
       if: github.event_name != 'pull_request' 
