@@ -32,9 +32,10 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
   
     - name: Pack
-      run: |
-        dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
-        find . -name "*.symbols.nupkg" -exec rm '{}' \;
+      run: dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
+#       run: |
+#         dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
+#         find . -name "*.symbols.nupkg" -exec rm '{}' \;
       if: github.event_name != 'pull_request'
       
     - name: Push to NuGet.org

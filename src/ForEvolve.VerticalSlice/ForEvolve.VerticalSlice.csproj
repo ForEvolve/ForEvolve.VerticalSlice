@@ -20,6 +20,7 @@
         <Copyright>Carl-Hugo Marcotte</Copyright>
         <IncludeSymbols>True</IncludeSymbols>
         <IncludeSource>True</IncludeSource>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <DebugType>Full</DebugType>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
