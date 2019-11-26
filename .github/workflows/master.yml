@@ -1,4 +1,4 @@
-name: Deploy master
+name: Build, Test, and Deploy master to NuGet.org
 
 on: 
   push:
@@ -32,10 +32,11 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
   
     - name: Pack
-      run: dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
-      # --include-source --include-symbols
+      run: |
+        dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
+        find . -name "*.symbols.nupkg" -exec rm '{}' \;
       if: github.event_name != 'pull_request'
       
-    - name: Push
+    - name: Push to NuGet.org
       run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
       if: github.event_name != 'pull_request'
