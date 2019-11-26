@@ -1,4 +1,4 @@
-name: .NET Core
+name: Deploy master
 
 on: 
   push:
@@ -34,7 +34,8 @@ jobs:
     - name: Pack
       run: dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
       # --include-source --include-symbols
+      if: github.event_name != 'pull_request'
       
     - name: Push
-      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-      if: github.event_name != 'pull_request' 
+      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+      if: github.event_name != 'pull_request'
