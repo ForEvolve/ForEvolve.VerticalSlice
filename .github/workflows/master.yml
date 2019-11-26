@@ -32,11 +32,9 @@ jobs:
         token: ${{secrets.GITHUB_TOKEN}}
   
     - name: Pack
-      run: dotnet pack --include-source --include-symbols --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
-
-    - name: Print generated build number
-      run: echo Build number is $BUILD_NUMBER
+      run: dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
+      # --include-source --include-symbols
       
     - name: Push
-      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push *.nupkg -k ${{ secrets.NUGET_API_KEY }}
       if: github.event_name != 'pull_request' 
