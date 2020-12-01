@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-namespace Microsoft.Extensions.DependencyInjection
+﻿namespace Microsoft.Extensions.DependencyInjection
 {
     using ForEvolve.VerticalSlice.OperationResults.Validations;
     using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -17,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
 }
 namespace ForEvolve.VerticalSlice.OperationResults.Validations
 {
+    using FluentValidation;
     using MediatR;
     using Scrutor;
 

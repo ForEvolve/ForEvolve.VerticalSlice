@@ -1,7 +1,7 @@
 ﻿using FluentValidation.Validators;
 using System;
 
-namespace ForEvolve.FluentValidation.Validators
+namespace ForEvolve.Validations.Validators
 {
     public class UriValidator : PropertyValidator
     {

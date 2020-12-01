@@ -1,4 +1,4 @@
-﻿using ForEvolve.FluentValidation.Validators;
+﻿using ForEvolve.Validations.Validators;
 using System;
 
 namespace FluentValidation
