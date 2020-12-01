@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ForEvolve.OperationResults.AspNetCore" Version="3.0.2-ge221d303bf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.VerticalSlice\ForEvolve.VerticalSlice.csproj" />
+  </ItemGroup>
+
+</Project>
