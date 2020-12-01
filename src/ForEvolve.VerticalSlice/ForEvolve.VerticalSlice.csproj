@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net5</TargetFramework>
         <RootNamespace>ForEvolve</RootNamespace>
         <Product>ForEvolve VerticalSlice</Product>
         <RepositoryUrl>https://github.com/ForEvolve/ForEvolve.VerticalSlice</RepositoryUrl>
@@ -29,12 +29,12 @@
         <PackageTags>forevolve,vertical,slice,architecture,aspnetcore,asp.net,core,aspnet,asp,automapper,fluentvalidation,mediatr</PackageTags>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
         <!--<PackageReference Include="ForEvolve.AspNetCore" Version="2.0.0-CI-859" />-->
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-        <PackageReference Include="Scrutor" Version="3.1.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Scrutor" Version="3.3.0" />
 
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19554-01" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 </Project>

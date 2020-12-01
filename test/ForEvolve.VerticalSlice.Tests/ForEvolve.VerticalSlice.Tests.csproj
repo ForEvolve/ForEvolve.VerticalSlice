@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>net5</TargetFramework>
     <RootNamespace>ForEvolve</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
