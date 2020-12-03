@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.OperationResults.AspNetCore" Version="3.0.24-g90b145e9ce" />
+    <PackageReference Include="ForEvolve.OperationResults.AspNetCore" Version="3.0.25-ga78a219ec9" />
   </ItemGroup>
 
   <ItemGroup>
