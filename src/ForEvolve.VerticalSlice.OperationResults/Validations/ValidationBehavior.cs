@@ -60,6 +60,7 @@ namespace ForEvolve.VerticalSlice.OperationResults.Validations
             return await next();
         }
     }
+
     public interface IValidationSeverityMapper
     {
         OperationMessageLevel Map(Severity severity);

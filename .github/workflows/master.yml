@@ -1,46 +1,81 @@
-name: Build, Test, and Deploy master to NuGet.org
+name: Build, Test, and Deploy
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - master
-    paths:
-      - "*"
-      - "!README.md"
+      - main
+    paths-ignore:
+      - 'samples/**'
+
   pull_request:
-    branches: 
+    branches:
       - master
+      - main
+
+  repository_dispatch:
+    types:
+      - deploy
+env:
+  DOTNET_2_VERSION: '2.1.x'
+  DOTNET_3_VERSION: '3.1.x'
+  DOTNET_5_VERSION: '5.0.x'
+  BUILD_CONFIGURATION: Release
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+  FEEDZ_URI: https://f.feedz.io/forevolve/vertical-slice/nuget/index.json
 
 jobs:
-  build:
+  build-and-test:
+    if: github.event_name != 'repository_dispatch'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dotnet: ['5.0.x']
 
     steps:
-    - uses: actions/checkout@v1
-      
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.0.101
-        
-    - name: Build
-      run: dotnet build --configuration Release
-      
-    - name: Unit Test
-      run: dotnet test --configuration Release
-        
-    - name: Generate build number
-      uses: einaregilsson/build-number@v2
-      with:
-        token: ${{secrets.GITHUB_TOKEN}}
-  
-    - name: Pack
-      run: dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
-#       run: |
-#         dotnet pack --configuration Release /p:PackageVersion=0.0.0-github.$BUILD_NUMBER
-#         find . -name "*.symbols.nupkg" -exec rm '{}' \;
-      if: github.event_name != 'pull_request'
-      
-    - name: Push to NuGet.org
-      run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-      if: github.event_name != 'pull_request'
+      - uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - name: Build
+        run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Unit Test
+        run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    strategy:
+      fail-fast: true
+      matrix:
+        dotnet: ['5.0.x']
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
+
+      - uses: dotnet/nbgv@master
+        with:
+          setAllVars: true
+
+      - name: Pack
+        run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Push to feedz.io
+        run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_URI }}
+        if: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true)
+
+      - name: Push to NuGet.org
+        run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+        if: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true)
