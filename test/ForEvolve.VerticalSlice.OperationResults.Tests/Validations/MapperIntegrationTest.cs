@@ -10,7 +10,7 @@ using Xunit;
 
 namespace ForEvolve.OperationResults.Validations
 {
-    public class DefaultIntegrationTest
+    public class MapperIntegrationTest
     {
         [Fact]
         public void IValidationFailureMapper_should_convert_ValidationFailure_to_the_expected_IMessage()
