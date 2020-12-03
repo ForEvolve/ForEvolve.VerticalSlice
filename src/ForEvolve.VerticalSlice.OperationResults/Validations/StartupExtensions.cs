@@ -9,7 +9,7 @@
         {
             services.TryAddSingleton<IValidationSeverityMapper, DefaultValidationSeverityMapper>();
             services.TryAddSingleton<IValidationFailureMapper, ValidationFailureMessageMapper>();
-            services.TryAddSingleton<IProblemDetailsMapper, ProblemDetailsMapper>();
+            services.TryAddSingleton<IProblemDetailsMapper, SimpleProblemDetailsMapper>();
             return services;
         }
     }

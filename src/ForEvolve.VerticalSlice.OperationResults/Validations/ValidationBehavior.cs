@@ -1,9 +1,6 @@
 ﻿using FluentValidation;
-using FluentValidation.Results;
 using ForEvolve.OperationResults;
-using ForEvolve.OperationResults.AspNetCore;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -58,59 +55,6 @@ namespace ForEvolve.OperationResults.Validations
                 }
             }
             return await next();
-        }
-    }
-
-    public interface IValidationSeverityMapper
-    {
-        OperationMessageLevel Map(Severity severity);
-    }
-
-    public class DefaultValidationSeverityMapper : IValidationSeverityMapper
-    {
-        public OperationMessageLevel Map(Severity severity) => severity switch
-        {
-            Severity.Warning => OperationMessageLevel.Warning,
-            Severity.Info => OperationMessageLevel.Information,
-            _ => OperationMessageLevel.Error,
-        };
-    }
-    public interface IValidationFailureMapper
-    {
-        IMessage Map(ValidationFailure validationFailure);
-    }
-    public interface IProblemDetailsMapper
-    {
-        ProblemDetails Map(ValidationFailure validationFailure);
-    }
-
-    public class ValidationFailureMessageMapper : IValidationFailureMapper
-    {
-        private readonly IValidationSeverityMapper _severityMapper;
-        private readonly IProblemDetailsMapper _problemDetailsMapper;
-        public ValidationFailureMessageMapper(IValidationSeverityMapper severityMapper, IProblemDetailsMapper problemDetailsMapper)
-        {
-            _severityMapper = severityMapper ?? throw new ArgumentNullException(nameof(severityMapper));
-            _problemDetailsMapper = problemDetailsMapper ?? throw new ArgumentNullException(nameof(problemDetailsMapper));
-        }
-
-        public IMessage Map(ValidationFailure validationFailure)
-        {
-            var severity = _severityMapper.Map(validationFailure.Severity);
-            var details = _problemDetailsMapper.Map(validationFailure);
-            return new ProblemDetailsMessage(details, severity);
-        }
-    }
-
-    public class ProblemDetailsMapper : IProblemDetailsMapper
-    {
-        public ProblemDetails Map(ValidationFailure validationFailure)
-        {
-            return new ProblemDetails
-            {
-                Title = validationFailure.ErrorCode,
-                Detail = validationFailure.ErrorMessage,
-            };
         }
     }
 }
