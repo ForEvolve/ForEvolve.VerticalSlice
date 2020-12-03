@@ -1,6 +1,6 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
-    using ForEvolve.VerticalSlice.OperationResults.Validations;
+    using ForEvolve.OperationResults.Validations;
     using Microsoft.Extensions.DependencyInjection.Extensions;
 
     public static class ForEvolveMediatRValidationBehaviorsServicesExtensions
@@ -14,7 +14,7 @@
         }
     }
 }
-namespace ForEvolve.VerticalSlice.OperationResults.Validations
+namespace ForEvolve.OperationResults.Validations
 {
     using FluentValidation;
     using MediatR;
