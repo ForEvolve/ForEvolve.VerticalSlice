@@ -3,35 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net5</TargetFramework>
         <RootNamespace>ForEvolve</RootNamespace>
-        <Product>ForEvolve VerticalSlice</Product>
-        <RepositoryUrl>https://github.com/ForEvolve/ForEvolve.VerticalSlice</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <IsPackable>True</IsPackable>
-        <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-        <Authors>Carl-Hugo Marcotte</Authors>
-        <Company>ForEvolve</Company>
-        <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve.VerticalSlice</PackageProjectUrl>
-        <PackageLicenseExpression>ISC</PackageLicenseExpression>
-        <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0.0</FileVersion>
-        <Version>1.0.0</Version>
-        <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-        <Copyright>Carl-Hugo Marcotte</Copyright>
-        <IncludeSymbols>True</IncludeSymbols>
-        <IncludeSource>True</IncludeSource>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <DebugType>Full</DebugType>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
         <Description>Some vertical slice architecture tools like validators, converters, etc.</Description>
         <PackageTags>forevolve,vertical,slice,architecture,aspnetcore,asp.net,core,aspnet,asp,automapper,fluentvalidation,mediatr</PackageTags>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
         <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
-        <!--<PackageReference Include="ForEvolve.AspNetCore" Version="2.0.0-CI-859" />-->
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Scrutor" Version="3.3.0" />
 
