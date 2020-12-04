@@ -16,35 +16,52 @@ on:
   repository_dispatch:
     types:
       - deploy
+
+  workflow_dispatch:
+    inputs:
+      deployToFeedz:
+        description: 'Set to `true` to deploy to Feedz.io'
+        required: false
+        default: ''
+      deployToNuget:
+        description: 'Set to `true` to deploy to NuGet.org'
+        required: false
+        default: ''
+
 env:
   DOTNET_2_VERSION: '2.1.x'
   DOTNET_3_VERSION: '3.1.x'
   DOTNET_5_VERSION: '5.0.x'
   BUILD_CONFIGURATION: Release
-  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   FEEDZ_URI: https://f.feedz.io/forevolve/vertical-slice/nuget/index.json
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
 jobs:
   build-and-test:
-    if: github.event_name != 'repository_dispatch'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         dotnet: ['5.0.x']
+    env:
+      IS_NOT_DISPATCH: ${{ github.event_name != 'repository_dispatch' && github.event_name != 'workflow_dispatch' }}
 
     steps:
       - uses: actions/checkout@v1
+        if: env.IS_NOT_DISPATCH
 
       - name: Setup .NET Core
+        if: env.IS_NOT_DISPATCH
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet }}
 
       - name: Build
+        if: env.IS_NOT_DISPATCH
         run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
       - name: Unit Test
+        if: env.IS_NOT_DISPATCH
         run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }}
 
   deploy:
@@ -74,8 +91,8 @@ jobs:
 
       - name: Push to feedz.io
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_URI }}
-        if: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true)
+        if: github.event_name == 'pull_request' || (github.event_name == 'repository_dispatch' && github.event.client_payload.feedz == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToFeedz == 'true')
 
       - name: Push to NuGet.org
         run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
-        if: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true)
+        if: github.event_name == 'push' || (github.event_name == 'repository_dispatch' && github.event.client_payload.nuget == true) || (github.event_name == 'workflow_dispatch' && github.event.inputs.deployToNuget == 'true')
