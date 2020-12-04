@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net5</TargetFramework>
+        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
         <RootNamespace>ForEvolve</RootNamespace>
         <Description>Some vertical slice architecture tools like validators, converters, etc.</Description>
         <PackageTags>forevolve,vertical,slice,architecture,aspnetcore,asp.net,core,aspnet,asp,automapper,fluentvalidation,mediatr</PackageTags>
@@ -11,7 +11,5 @@
         <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
         <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
         <PackageReference Include="Scrutor" Version="3.3.0" />
-
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     </ItemGroup>
 </Project>

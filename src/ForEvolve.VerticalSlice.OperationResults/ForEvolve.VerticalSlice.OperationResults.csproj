@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
     <RootNamespace>ForEvolve.Operationresults</RootNamespace>
     <Description>Add support for OperationResults to the Vertical Slice pipeline.</Description>
     <PackageTags>fluentvalidation,mediatr,operationresults,operation-results,operation,results,forevolve,vertical,slice,architecture,net5,net,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.OperationResults.AspNetCore" Version="3.0.25-ga78a219ec9" />
+    <PackageReference Include="ForEvolve.OperationResults.AspNetCore" Version="3.0.28-ga5545a1a59" />
   </ItemGroup>
 
   <ItemGroup>
