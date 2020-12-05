@@ -1,7 +1,10 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
+    using FluentValidation;
     using ForEvolve.OperationResults.Validations;
+    using MediatR;
     using Microsoft.Extensions.DependencyInjection.Extensions;
+    using Scrutor;
 
     public static class ForEvolveMediatRValidationBehaviorsServicesExtensions
     {
@@ -13,12 +16,6 @@
             return services;
         }
     }
-}
-namespace ForEvolve.OperationResults.Validations
-{
-    using FluentValidation;
-    using MediatR;
-    using Scrutor;
 
     /// <summary>
     /// Contains extension methods to help wire up MediatR.
