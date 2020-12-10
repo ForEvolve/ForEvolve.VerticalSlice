@@ -12,7 +12,6 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>True</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <DebugType>embedded</DebugType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
         <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
